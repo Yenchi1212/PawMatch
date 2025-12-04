@@ -2,13 +2,16 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-web';
 
-export default function LoginScreen({navigation}) {
+import{createUserWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../firebase";
+
+export default function SignupScreen({navigation}) {
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>PawMatch Login </Text>
+      <Text style={styles.title}>Create your Account </Text>
 
       <TextInput
       style = {styles.input}
@@ -25,12 +28,13 @@ export default function LoginScreen({navigation}) {
       onChangeText={setPassword}
       />
 
-      <TouchableOpacity style = {styles.button}>
-        <Text style = {styles.buttonText}>Login</Text>
+      <TouchableOpacity 
+        style = {styles.button}>
+        
       </TouchableOpacity>
 
-      <TouchableOpacity  onPress={() => navigation.navigate("Signup")}>
-        <Text style = {styles.link}>Dont't have an account? Sign up</Text>
+      <TouchableOpacity  onPress={() => navigation.navigate("Login")}>
+        <Text style = {styles.link}>Already have an account? Login</Text>
       </TouchableOpacity>
       
     </View>
