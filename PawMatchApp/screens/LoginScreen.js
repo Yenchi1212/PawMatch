@@ -20,7 +20,7 @@ export default function LoginScreen({navigation}) {
         await signInWithEmailAndPassword(auth,email,password);
         alert("Logged in Sussesfully!");
 
-        navigation.replace("Home");
+        navigation.replace("HomeTabs");
       }
       catch(error){
         alert(error.message);
@@ -50,7 +50,7 @@ export default function LoginScreen({navigation}) {
         <Text style = {styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity  onPress={() => navigation.replace("Home")}>
+      <TouchableOpacity  onPress={() => navigation.replace("HomeTabs")}>
         <Text style = {styles.link}>Dont't have an account? Sign up</Text>
       </TouchableOpacity>
       
