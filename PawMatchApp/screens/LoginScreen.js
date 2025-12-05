@@ -2,9 +2,30 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-web';
 
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+
 export default function LoginScreen({navigation}) {
+
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
+
+    const handleLogin = async() =>{
+      if(!email||!password){
+        alert("Please Enter email and password");
+        return;
+      }
+
+      try{
+        await signInWithEmailAndPassword(auth,email,password);
+        alert("Logged in Sussesfully!");
+
+        navigation.navigate("Signup");
+      }
+      catch(error){
+        alert(error.message);
+      }
+    };
 
   return (
     <View style={styles.container}>
@@ -13,7 +34,7 @@ export default function LoginScreen({navigation}) {
       <TextInput
       style = {styles.input}
       placeholder='Email'
-      value='email'
+      value={email}
       onChangeText={setEmail}
       />
 
@@ -21,11 +42,11 @@ export default function LoginScreen({navigation}) {
       style = {styles.input}
       placeholder='Password'
       secureTextEntry
-      value='password'
+      value={password}
       onChangeText={setPassword}
       />
 
-      <TouchableOpacity style = {styles.button}>
+      <TouchableOpacity style = {styles.button} onPress={handleLogin}>
         <Text style = {styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
@@ -41,37 +62,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding:20,
+    padding: 20,
   },
-  text: {
+  title: {
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 40,
   },
-
-  input:{
-    borderWidth:1,
-    borderColor:'#aaa',
-    padding:15,
-    borderRadius:6,
-    marginTop:10,
+  input: {
+    borderWidth: 1,
+    borderColor: '#aaa',
+    padding: 15,
+    borderRadius: 6,
+    marginTop: 10,
   },
   button: {
     backgroundColor: '#ff914d',
     padding: 15,
     borderRadius: 6,
-    marginTop:10
+    marginTop: 10,
   },
   buttonText: {
-    textAlign:'justify',
-    color:'white',
+    textAlign: 'center',
+    color: 'white',
     fontWeight: 'bold',
-    fontSize:16,
+    fontSize: 16,
   },
   link: {
-    marginTop:15,
-    textAlign:'center',
-    color:'#007bff'
-  }
+    marginTop: 15,
+    textAlign: 'center',
+    color: '#007bff',
+  },
 });

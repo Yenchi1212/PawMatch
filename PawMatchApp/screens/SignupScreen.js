@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-web';
 
-import{createUserWithEmailAndPassword} from "firebase/auth";
-import {auth} from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+
 
 export default function SignupScreen({navigation}) {
     const[email,setEmail] = useState('');
@@ -16,7 +17,7 @@ export default function SignupScreen({navigation}) {
       <TextInput
       style = {styles.input}
       placeholder='Email'
-      value='email'
+      value={email}
       onChangeText={setEmail}
       />
 
@@ -24,13 +25,30 @@ export default function SignupScreen({navigation}) {
       style = {styles.input}
       placeholder='Password'
       secureTextEntry
-      value='password'
+      value={password}
       onChangeText={setPassword}
       />
 
       <TouchableOpacity 
-        style = {styles.button}>
-        
+        style = {styles.button}
+        onPress={async()=>{
+          if(!email || !password){
+            alert("Please enter your email and password");
+            return;
+          }
+          try{
+            //create user in firebase
+            await createUserWithEmailAndPassword(auth,email,password);
+            alert("Account created successfully");
+            navigation.navigate("Login");
+          }
+          catch(error){
+            alert(error.message);
+          }
+        }}
+      >
+        <Text style = {styles.buttonText}>Sign Up</Text>
+
       </TouchableOpacity>
 
       <TouchableOpacity  onPress={() => navigation.navigate("Login")}>
