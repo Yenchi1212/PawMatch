@@ -1,11 +1,10 @@
-import {SafeAreaView,Text,StyleSheet} from "react-native";
-import React from "react";
+import {SafeAreaView,Text,StyleSheet} from "react-native-web";
 
-export default function MatchScreen() {
+export default function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Match Screen</Text>
-      <Text>Swipe through pets to find your perfect match!</Text>
+      <Text style={styles.title}>Profile Screen</Text>
+      <Text>User profile details will go here.</Text>
     </SafeAreaView>
   );
 }

@@ -1,11 +1,10 @@
-import {SafeAreaView,Text,StyleSheet} from "react-native";
-import React from "react";
+import { SafeAreaView, Text,StyleSheet } from "react-native-web";
 
-export default function MatchScreen() {
+export default function SavedScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Match Screen</Text>
-      <Text>Swipe through pets to find your perfect match!</Text>
+      <Text style={styles.title}>Saved Screen</Text>
+      <Text>Your saved pets will appear here.</Text>
     </SafeAreaView>
   );
 }

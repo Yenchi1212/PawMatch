@@ -1,11 +1,11 @@
-import {SafeAreaView,Text,StyleSheet} from "react-native";
 import React from "react";
+import { SafeAreaView, Text, StyleSheet } from "react-native";
 
-export default function MatchScreen() {
+export default function ExploreScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Match Screen</Text>
-      <Text>Swipe through pets to find your perfect match!</Text>
+      <Text style={styles.title}>Explore Screen</Text>
+      <Text>Full pet list + filters will go here</Text>
     </SafeAreaView>
   );
 }
@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFF8F2"
+    backgroundColor: "#FFF8F2",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10
+    marginBottom: 10,
   },
 });

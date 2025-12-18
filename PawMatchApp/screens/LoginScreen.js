@@ -10,22 +10,25 @@ export default function LoginScreen({navigation}) {
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
 
-    const handleLogin = async() =>{
-      if(!email||!password){
-        alert("Please Enter email and password");
-        return;
-      }
+    const handleLogin = async () => {
+  console.log("Login button pressed");
 
-      try{
-        await signInWithEmailAndPassword(auth,email,password);
-        alert("Logged in Sussesfully!");
+  if (!email || !password) {
+    alert("Please enter email and password");
+    return;
+  }
 
-        navigation.replace("HomeTabs");
-      }
-      catch(error){
-        alert(error.message);
-      }
-    };
+  try {
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    console.log("Logged in user:", user);
+    alert("Logged in successfully!");
+    navigation.replace("Tabs");
+  } catch (error) {
+    console.log("Login error:", error);
+    alert(error.message);
+  }
+};
+
 
   return (
     <View style={styles.container}>
@@ -50,7 +53,7 @@ export default function LoginScreen({navigation}) {
         <Text style = {styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity  onPress={() => navigation.replace("HomeTabs")}>
+      <TouchableOpacity  onPress={() => navigation.navigate("Signup")}>
         <Text style = {styles.link}>Dont't have an account? Sign up</Text>
       </TouchableOpacity>
       
@@ -61,37 +64,53 @@ export default function LoginScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF8F2',  // soft cream background
     justifyContent: 'center',
-    padding: 20,
+    paddingHorizontal: 25,
+    paddingVertical: 10,
   },
+
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
+    color: '#FF914D',
     textAlign: 'center',
     marginBottom: 40,
   },
+
   input: {
+    backgroundColor: 'white',
     borderWidth: 1,
-    borderColor: '#aaa',
+    borderColor: '#FFD1A9',
     padding: 15,
-    borderRadius: 6,
-    marginTop: 10,
+    borderRadius: 12,
+    marginTop: 12,
+    fontSize: 16,
   },
+
   button: {
-    backgroundColor: '#ff914d',
-    padding: 15,
-    borderRadius: 6,
-    marginTop: 10,
+    backgroundColor: '#FF914D',
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 20,
+    shadowColor: '#FF914D',
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 3,
   },
+
   buttonText: {
     textAlign: 'center',
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
   },
+
   link: {
-    marginTop: 15,
+    marginTop: 18,
     textAlign: 'center',
-    color: '#007bff',
+    color: '#6CC4A1',
+    fontSize: 15,
+    fontWeight: '600',
   },
 });
